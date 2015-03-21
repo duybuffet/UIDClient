@@ -54,7 +54,7 @@ public class Test {
                 view.setVisible(true);
                 view.setResizable(false);
                 ServerControl control = new ServerControl(view);
-                // test github
+                // test github dang hung
             }
         });
     }
