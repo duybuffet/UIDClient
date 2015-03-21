@@ -26,7 +26,6 @@ import view.ServerFrame;
 public class ServerControl {
     private ServerFrame serverFrame;
     private AreaPanel areaPanel;
-    private CentrePanel centrePanel;
     private EmployeePanel employeePanel;
     private LoginPanel loginPanel;
     private RequestPanel requestPanel;
@@ -41,7 +40,6 @@ public class ServerControl {
         this.serverFrame = serverFrame;
         loginPanel = new LoginPanel();        
         areaPanel = new AreaPanel();
-        centrePanel = new CentrePanel();
         employeePanel = new EmployeePanel();
         requestPanel = new RequestPanel();
         menuPanel = new MenuPanel();
@@ -91,9 +89,6 @@ public class ServerControl {
             if (btn == menuPanel.getBtnArea()) {
                 serverFrame.getMainSplitPane().setRightComponent(areaPanel);
                 areaPanel.addBtnAreaListener(new AreaListener());
-            } else if (btn == menuPanel.getBtnCentre()) {
-                serverFrame.getMainSplitPane().setRightComponent(centrePanel);
-                centrePanel.addBtnCentreListener(new CentreListener());
             } else if (btn == menuPanel.getBtnEmp()) {
                 serverFrame.getMainSplitPane().setRightComponent(employeePanel);
                 employeePanel.addBtnEmployeeListener(new EmployeeListener());

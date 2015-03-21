@@ -22,7 +22,7 @@ public class DbConnect {
     public static final String DATABASE = "UNIQUE_IDENTIFICATION";
     public static final String DB_URL = "jdbc:sqlserver://localhost:1433;databaseName="+DATABASE;
     public static final String USER = "sa";
-    public static final String PASSWORD = "123456";
+    public static final String PASSWORD = "1234567";
     public static final String DB_CLASS = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 
     private DbConnect() {

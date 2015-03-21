@@ -32,7 +32,6 @@ public class MenuPanel extends javax.swing.JPanel {
 
         btnEmp = new javax.swing.JButton();
         btnArea = new javax.swing.JButton();
-        btnCentre = new javax.swing.JButton();
         btnRequest = new javax.swing.JButton();
 
         btnEmp.setText("Employee");
@@ -45,8 +44,6 @@ public class MenuPanel extends javax.swing.JPanel {
             }
         });
 
-        btnCentre.setText("Centre");
-
         btnRequest.setText("Request");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -55,7 +52,6 @@ public class MenuPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(btnArea, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(btnEmp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnCentre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnRequest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -65,19 +61,13 @@ public class MenuPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnArea, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCentre, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(128, Short.MAX_VALUE))
+                .addContainerGap(174, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     public JButton getBtnArea() {
         return btnArea;
-    }
-
-    public JButton getBtnCentre() {
-        return btnCentre;
     }
 
     public JButton getBtnEmp() {
@@ -95,14 +85,12 @@ public class MenuPanel extends javax.swing.JPanel {
 
     public void addBtnMenuListener(ActionListener log) {
         btnArea.addActionListener(log);
-        btnCentre.addActionListener(log);
         btnEmp.addActionListener(log);
         btnRequest.addActionListener(log);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnArea;
-    private javax.swing.JButton btnCentre;
     private javax.swing.JButton btnEmp;
     private javax.swing.JButton btnRequest;
     // End of variables declaration//GEN-END:variables
