@@ -113,7 +113,10 @@ public class ServerControl {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            JButton btn = (JButton) e.getSource();
+            if (btn == areaPanel.getBtnAdd()) {
+                // add
+            }
         }
         
     }
