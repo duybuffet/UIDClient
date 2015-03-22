@@ -29,7 +29,6 @@ public class CentreFrame extends javax.swing.JFrame{
             public void windowClosing(WindowEvent e) {
                 dispose();
             }
-
             @Override
             public void windowClosed(WindowEvent e) {
                 dispose();
