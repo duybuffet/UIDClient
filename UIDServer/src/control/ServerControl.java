@@ -25,7 +25,6 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import view.AreaPanel;
 import view.CentreFrame;
-import view.CentrePanel;
 import view.EmployeePanel;
 import view.LoginPanel;
 import view.MenuPanel;
@@ -534,8 +533,6 @@ public class ServerControl {
         private void showMessageDialog(String message) {
             JOptionPane.showMessageDialog(centreFrame, message);
         }
-
-
     }
 
     class RequestListener implements ActionListener {
