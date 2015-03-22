@@ -20,7 +20,7 @@ public class DbConnect {
     private static DbConnect instance = new DbConnect();
     private Connection conn = null;
     public static final String DATABASE = "UNIQUE_IDENTIFICATION";
-    public static final String DB_URL = "jdbc:sqlserver://localhost:1433;databaseName="+DATABASE;
+    public static final String DB_URL = "jdbc:sqlserver://localhost:49291;databaseName="+DATABASE;
     public static final String USER = "sa";
     public static final String PASSWORD = "1234567";
     public static final String DB_CLASS = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
@@ -56,4 +56,7 @@ public class DbConnect {
     public static Connection getConnection() {
         return instance.createConnection();
     }   
+    public static void main(String[] args) {
+        System.out.println(getConnection());
+    }
 }

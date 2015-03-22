@@ -47,17 +47,39 @@ public class AreaPanel extends javax.swing.JPanel {
 
         jLabel1.setText("Area Code:");
 
+        txtCode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodeActionPerformed(evt);
+            }
+        });
+
         btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
 
         btnAll.setText("Show All");
 
         btnAdd.setText("Add");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         btnDel.setText("Delete");
 
         btnEdit.setText("Edit");
 
         jLabel2.setText("Area Name:");
+
+        jScrollPane2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jScrollPane2.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
+        jScrollPane2.setEnabled(false);
+        jScrollPane2.setFocusable(false);
+        jScrollPane2.setRequestFocusEnabled(false);
 
         tblArea.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -125,6 +147,18 @@ public class AreaPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void txtCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCodeActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSearchActionPerformed
+
     public JTable getTblArea() {
         return tblArea;
     }
@@ -152,6 +186,9 @@ public class AreaPanel extends javax.swing.JPanel {
     public JButton getBtnAdd() {
         return btnAdd;
     }
+    public JButton getBtnSearch() {
+        return btnSearch;
+    }
 
     public JButton getBtnAll() {
         return btnAll;
@@ -170,6 +207,7 @@ public class AreaPanel extends javax.swing.JPanel {
         btnAll.addActionListener(log);
         btnDel.addActionListener(log);
         btnEdit.addActionListener(log);
+        btnSearch.addActionListener(log);
     }        
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
