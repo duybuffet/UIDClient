@@ -44,6 +44,7 @@ public class AreaPanel extends javax.swing.JPanel {
         txtName = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblArea = new javax.swing.JTable();
+        btnGotoCentre = new javax.swing.JButton();
 
         jLabel1.setText("Area Code:");
 
@@ -91,14 +92,18 @@ public class AreaPanel extends javax.swing.JPanel {
         ));
         jScrollPane2.setViewportView(tblArea);
 
+        btnGotoCentre.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnGotoCentre.setText("Go to  Centre");
+        btnGotoCentre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGotoCentreActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
-                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(70, 70, 70)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,12 +126,17 @@ public class AreaPanel extends javax.swing.JPanel {
                                 .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnSearch)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnGotoCentre)
+                .addGap(21, 21, 21))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -141,9 +151,10 @@ public class AreaPanel extends javax.swing.JPanel {
                     .addComponent(btnAdd)
                     .addComponent(btnEdit)
                     .addComponent(btnDel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addGap(36, 36, 36)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnGotoCentre, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -158,6 +169,10 @@ public class AreaPanel extends javax.swing.JPanel {
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void btnGotoCentreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGotoCentreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGotoCentreActionPerformed
 
     public JTable getTblArea() {
         return tblArea;
@@ -201,6 +216,9 @@ public class AreaPanel extends javax.swing.JPanel {
     public JButton getBtnEdit() {
         return btnEdit;
     }    
+    public JButton getBtnGoto() {
+        return btnGotoCentre;
+    }    
     
     public void addBtnAreaListener(ActionListener log) {
         btnAdd.addActionListener(log);
@@ -208,6 +226,7 @@ public class AreaPanel extends javax.swing.JPanel {
         btnDel.addActionListener(log);
         btnEdit.addActionListener(log);
         btnSearch.addActionListener(log);
+        btnGotoCentre.addActionListener(log);
     }        
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -215,6 +234,7 @@ public class AreaPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnAll;
     private javax.swing.JButton btnDel;
     private javax.swing.JButton btnEdit;
+    private javax.swing.JButton btnGotoCentre;
     private javax.swing.JButton btnSearch;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

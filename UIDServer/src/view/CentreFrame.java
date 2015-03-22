@@ -5,11 +5,16 @@
  */
 package view;
 
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+
 /**
  *
  * @author DH
  */
-public class CentreFrame extends javax.swing.JFrame {
+public class CentreFrame extends javax.swing.JFrame{
 
     /**
      * Creates new form CentreFrame
@@ -167,7 +172,57 @@ public class CentreFrame extends javax.swing.JFrame {
             }
         });
     }
+    public JTable getTblCentre() {
+        return tblCentre;
+    }
 
+    public void setTblCentre(JTable tblCentre) {
+        this.tblCentre = tblCentre;
+    }   
+
+    public JTextField getTxtId() {
+        return txtId;
+    }
+
+    public void setTxtId(JTextField txtId) {
+        this.txtId = txtId;
+    }
+
+    public JTextField getTxtName() {
+        return txtName;
+    }
+
+    public void setTxtName(JTextField txtName) {
+        this.txtName = txtName;
+    }
+
+    public JButton getBtnAdd() {
+        return btnAdd;
+    }
+
+    public JButton getBtnAll() {
+        return btnAll;
+    }
+
+    public JButton getBtnDel() {
+        return btnDel;
+    }
+
+    public JButton getBtnEdit() {
+        return btnEdit;
+    }
+    public JButton getBtnSearch() {
+        return btnSearch;
+    }
+    
+    public void addBtnCentreListener(ActionListener log) {
+        btnAdd.addActionListener(log);
+        btnAll.addActionListener(log);
+        btnDel.addActionListener(log);
+        btnEdit.addActionListener(log);
+        btnSearch.addActionListener(log);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnAll;

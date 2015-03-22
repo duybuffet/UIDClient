@@ -6,14 +6,15 @@
 package control;
 
 import common.model.Area;
+import common.model.Centre;
 import common.model.Employee;
 import dao.AreaDAO;
+import dao.CentreDAO;
 import dao.EmployeeDAO;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -21,18 +22,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import view.AreaPanel;
 import view.CentreFrame;
+import view.CentrePanel;
 import view.EmployeePanel;
 import view.LoginPanel;
 import view.MenuPanel;
 import view.RequestPanel;
 import view.ServerFrame;
+
 
 /**
  *
@@ -41,6 +40,7 @@ import view.ServerFrame;
 public class ServerControl {
 
     private ServerFrame serverFrame;
+    private CentreFrame centreFrame;
     private AreaPanel areaPanel;
     private EmployeePanel employeePanel;
     private LoginPanel loginPanel;
@@ -50,6 +50,10 @@ public class ServerControl {
     private AreaDAO areaDAO;
     private String areaCode, areaName;
 
+    private CentreDAO centreDAO;
+    private String centreName;
+    private int centreID;
+    
     public ServerControl(ServerFrame serverFrame) {
         initComponents(serverFrame);
     }
@@ -145,8 +149,6 @@ public class ServerControl {
             // show all
             if (btn == areaPanel.getBtnAll()) {
                 showAllArea();
-                
-                
             }
             // edit
             if(btn == areaPanel.getBtnEdit()){
@@ -167,9 +169,13 @@ public class ServerControl {
                     showSearchArea(search);
                 }
             }
-            
-            
-
+            // Go to centre
+            if(btn == areaPanel.getBtnGoto()){
+                gotoCentre();
+//                centreFrame.dispose();
+//                serverFrame.getMainSplitPane().setRightComponent(centrePanel);
+                
+            }
         }
         // Insert Area
         private void insertArea() {
@@ -179,12 +185,12 @@ public class ServerControl {
                 areaDAO = new AreaDAO();
                 try {
                     areaDAO.insert(new Area(areaCode, areaName));
-                    JOptionPane.showMessageDialog(areaPanel, "Insert Success!");
+                    showMessageDialog("Insert Success!");
                     areaPanel.getTxtCode().setText("");
                     areaPanel.getTxtName().setText("");
                     showAllArea();
                 } catch (SQLException ex) {
-                    JOptionPane.showMessageDialog(areaPanel, "Insert wrong!");
+                    showMessageDialog("Insert wrong!");
                     Logger.getLogger(ServerControl.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
@@ -207,13 +213,13 @@ public class ServerControl {
                     test = true;
                     break;
                 case 1:
-                    JOptionPane.showMessageDialog(areaPanel, ("Request:\nAreaCode not null!"));
+                    showMessageDialog("Request:\nAreaCode not null!");
                     break;
                 case 2:
-                    JOptionPane.showMessageDialog(areaPanel, ("Request:\nAreaName not Null!"));
+                    showMessageDialog("Request:\nAreaName not Null!");
                     break;
                 case 3:
-                    JOptionPane.showMessageDialog(areaPanel, ("Request:\nAreaCode not null!\nAreaName not Null!"));
+                    showMessageDialog("Request:\nAreaCode not null!\nAreaName not Null!");
                     break;
             }
             return test;
@@ -226,10 +232,10 @@ public class ServerControl {
                 areaDAO = new AreaDAO();
                 try {
                     areaDAO.update(new Area(areaCode, areaName));
-                    JOptionPane.showMessageDialog(areaPanel, "Update Success!");
+                    showMessageDialog("Update Success!");
                     showAllArea(); 
                 } catch (SQLException ex) {
-                    JOptionPane.showMessageDialog(areaPanel, "Update wrong!");
+                    showMessageDialog("Update wrong!");
                     Logger.getLogger(ServerControl.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
@@ -266,10 +272,11 @@ public class ServerControl {
                 areaDAO = new AreaDAO();
                 try {
                     areaDAO.delete(new Area(areaCode, areaName));
+                    showMessageDialog("Delete Success!");
                     JOptionPane.showMessageDialog(areaPanel, "Delete Success!");
                     showAllArea();
                 } catch (SQLException ex) {
-                    JOptionPane.showMessageDialog(areaPanel, "Delete wrong!");
+                    showMessageDialog("Delete wrong!");
                     Logger.getLogger(ServerControl.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
@@ -280,12 +287,10 @@ public class ServerControl {
                 @Override
                 public void mousePressed(MouseEvent e) {
                     int row = areaPanel.getTblArea().getSelectedRow();
-                    areaCode = (String) areaPanel.getTblArea().getValueAt(row, 0);
-                    areaName = (String) areaPanel.getTblArea().getValueAt(row, 1);
 
-                    areaPanel.getTxtCode().setText(areaCode);
-                    areaPanel.getTxtName().setText(areaName);
-                    areaPanel.getTxtCode().setEditable(false);
+                    areaPanel.getTxtCode().setText((String) areaPanel.getTblArea().getValueAt(row, 0));
+                    areaPanel.getTxtName().setText((String) areaPanel.getTblArea().getValueAt(row, 1));
+//                    areaPanel.getTxtCode().setEditable(false);
                 }
             });
             
@@ -311,21 +316,225 @@ public class ServerControl {
                     eventTableArea();
                 }
                 else{
-                    JOptionPane.showMessageDialog(areaPanel, "Enter key search Incorrect!");
+                    showMessageDialog("Enter key search Incorrect!");
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(ServerControl.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
+        private void showMessageDialog(String message) {
+            JOptionPane.showMessageDialog(areaPanel, message);
+        }
+
+        private void gotoCentre() {
+            areaCode = areaPanel.getTxtCode().getText().trim();
+            if(!areaCode.isEmpty()){
+                centreFrame = new CentreFrame();
+                centreFrame.setVisible(true);
+                centreFrame.addBtnCentreListener(new CentreListener());
+                new CentreListener().showAllCentre();
+            }
+            else{
+                showMessageDialog("Not Choice row in table !");
+            }
+        }
     }
 
     class CentreListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            JButton btn = (JButton) e.getSource();
+            if (btn == centreFrame.getBtnAdd()) {
+                // check JTextFiel areaCode and areaName
+                if(testTxtInput() != false){
+                    insertCentre();
+                }
+
+            }
+            // show all
+            if (btn == centreFrame.getBtnAll()) {
+                showAllCentre();
+            }
+            // edit
+            if(btn == centreFrame.getBtnEdit()){
+                if(testTxtInput() != false){
+                    updateCentre();
+                }
+            }
+            // Delete
+            if(btn == centreFrame.getBtnDel()){
+                if(testTxtInput() != false){
+                    deleteCentre();
+                }
+            }
+            // Search
+            if(btn == centreFrame.getBtnSearch()){
+                try {
+                    int search =Integer.parseInt(JOptionPane.showInputDialog(centreFrame,"Input Key Search "));
+                    if(search != 0){
+                        showSearchCentre(search);
+                    }
+                } catch (NumberFormatException ex) {
+                }
+            }
+        }
+        // Insert Area
+        private void insertCentre() {
+            int result = JOptionPane.showConfirmDialog(centreFrame, "CentreID : " + centreID + "\nCentre Name : " + centreName, "Are you insert?", JOptionPane.YES_NO_OPTION);
+            if (result == JOptionPane.YES_OPTION) {
+
+                centreDAO = new CentreDAO();
+                try {
+                    centreDAO.insert(new Centre(centreID, centreName));
+                    showMessageDialog("Insert Success!");
+                    centreFrame.getTxtId().setText("");
+                    centreFrame.getTxtName().setText("");
+                    showAllCentre();
+                } catch (SQLException ex) {
+                    showMessageDialog("Insert wrong!");
+                    showMessageDialog(ex.toString());
+                    Logger.getLogger(ServerControl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        //Test input area code and area name
+        private boolean testTxtInput() {
+            int countTest = 0;
+            boolean test = false;
+            try {
+                centreID = Integer.parseInt(centreFrame.getTxtId().getText().trim());
+            } catch (NumberFormatException ex) {
+                countTest = 1;
+            }
+            centreName = centreFrame.getTxtName().getText().trim();
+
+            if(centreFrame.getTxtId().getText().trim().isEmpty()){
+                countTest = 1;
+                
+            }
+            if (centreName.isEmpty()) {
+                countTest += 2;
+            }
+            switch (countTest) {
+                case 0:
+                    test = true;
+                    break;
+                case 1:
+                    showMessageDialog("Request:\nCentre ID is Null or not Number!");
+                    break;
+                case 2:
+                    showMessageDialog("Request:\nCentre Name is Null!");
+                    break;
+                case 3:
+                    showMessageDialog("Request:\nCentre ID is null or not Number!!\nCentre Name is Null!");
+                    break;
+            }
+            return test;
+        }
+
+        private void updateCentre() {
+            int result = JOptionPane.showConfirmDialog(centreFrame, "CentreID : " + centreID + "\nCentreName : " + centreName, "Are you insert?", JOptionPane.YES_NO_OPTION);
+            if (result == JOptionPane.YES_OPTION) {
+
+                centreDAO = new CentreDAO();
+                try {
+                    centreDAO.update(new Centre(centreID, centreName));
+                    showMessageDialog("Update Success!");
+                    showAllCentre(); 
+                } catch (SQLException ex) {
+                    showMessageDialog("Update wrong!");
+                    Logger.getLogger(ServerControl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+        private void showAllCentre() {
+            centreDAO = new CentreDAO();
+            ArrayList<Centre> listCentre = new ArrayList<>();
+            try {
+                listCentre = centreDAO.selectAllByAreaCode(areaCode);
+                Vector tblRecords = new Vector();
+                Vector tblTitle = new Vector();
+                tblTitle.add("Centre ID");
+                tblTitle.add("Centre Name");
+
+                for (Centre lc : listCentre) {
+                    Vector record = new Vector();
+                    record.add(lc.getCentreId());
+                    record.add(lc.getCentreName());
+                    tblRecords.add(record);
+                }
+
+                centreFrame.getTblCentre().setModel(new DefaultTableModel(tblRecords, tblTitle));
+                eventTableCentre();
+            } catch (SQLException ex) {
+                Logger.getLogger(ServerControl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        private void deleteCentre() {
+            int result = JOptionPane.showConfirmDialog(centreFrame, "Centre ID : " + centreID + "\nCentre Name : " + centreName, "Are you delete?", JOptionPane.YES_NO_OPTION);
+            if (result == JOptionPane.YES_OPTION) {
+
+                centreDAO = new CentreDAO();
+                try {
+                    centreDAO.delete(new Centre(centreID, centreName));
+                    showMessageDialog("Delete Success!");
+                    showAllCentre();
+                } catch (SQLException ex) {
+                    showMessageDialog("Delete wrong!");
+                    Logger.getLogger(ServerControl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+        private void eventTableCentre() {
+            centreFrame.getTblCentre().addMouseListener(new MouseAdapter() {
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    int row = centreFrame.getTblCentre().getSelectedRow();
+
+                    centreFrame.getTxtId().setText((String) centreFrame.getTblCentre().getValueAt(row, 0));
+                    centreFrame.getTxtName().setText((String) centreFrame.getTblCentre().getValueAt(row, 1));
+//                    areaPanel.getTxtCode().setEditable(false);
+                }
+            });
             
         }
+
+        private void showSearchCentre(int centreID) {
+            centreDAO = new CentreDAO();
+            Centre centre = new Centre();
+            try {
+                centre = centreDAO.selectCentreById(centreID);
+                if(centre != null){
+                    Vector tblRecords = new Vector();
+                    Vector tblTitle = new Vector();
+                    tblTitle.add("Centre ID");
+                    tblTitle.add("Centre Name");
+
+                    Vector record = new Vector();
+                    record.add(centre.getCentreId());
+                    record.add(centre.getCentreName());
+                    tblRecords.add(record);
+
+                    centreFrame.getTblCentre().setModel(new DefaultTableModel(tblRecords, tblTitle));
+                    eventTableCentre();
+                }
+                else{
+                    showMessageDialog("Enter key search Incorrect!");
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(ServerControl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        private void showMessageDialog(String message) {
+            JOptionPane.showMessageDialog(centreFrame, message);
+        }
+
 
     }
 
