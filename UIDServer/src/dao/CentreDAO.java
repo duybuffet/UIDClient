@@ -133,11 +133,11 @@ public class CentreDAO {
      * @param centre The centre we want to insert to the database.
      * @throws SQLException
      */
-    public void insert(Centre centre) throws SQLException {
-        String query = "INSERT INTO Centre(CentreId, CentreName)VALUES(?,?)";
+    public void insert(String centreName, String areaCode) throws SQLException {
+        String query = "INSERT INTO Centre(CentreName, AreaCode)VALUES(?,?)";
         PreparedStatement ps = DbConnect.getConnection().prepareStatement(query);
-        ps.setInt(1, centre.getCentreId());
-        ps.setString(2, centre.getCentreName());
+        ps.setString(1, centreName);
+        ps.setString(2, areaCode);
         ps.executeUpdate();
     }
 
@@ -162,7 +162,7 @@ public class CentreDAO {
      * @throws SQLException
      */
     public void delete(Centre centre) throws SQLException {
-        String query = "DELETE FROM Centre WHERE CentreCode = ?";
+        String query = "DELETE FROM Centre WHERE CentreID = ?";
         PreparedStatement ps = DbConnect.getConnection().prepareStatement(query);
         ps.setInt(1, centre.getCentreId());
         ps.executeUpdate();

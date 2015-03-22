@@ -111,6 +111,7 @@ public class ServerControl {
             if (btn == menuPanel.getBtnArea()) {
                 serverFrame.getMainSplitPane().setRightComponent(areaPanel);
                 areaPanel.addBtnAreaListener(new AreaListener());
+                new AreaListener().showAllArea();
             } else if (btn == menuPanel.getBtnEmp()) {
                 serverFrame.getMainSplitPane().setRightComponent(employeePanel);
                 employeePanel.addBtnEmployeeListener(new EmployeeListener());
@@ -200,8 +201,8 @@ public class ServerControl {
             boolean test = false;
             areaCode = areaPanel.getTxtCode().getText().trim();
             areaName = areaPanel.getTxtName().getText().trim();
-
-            if (areaCode.isEmpty()) {
+            
+            if (areaCode.isEmpty()|| areaCode.length()!=2) {
                 countTest += 1;
             }
             if (areaName.isEmpty()) {
@@ -212,13 +213,13 @@ public class ServerControl {
                     test = true;
                     break;
                 case 1:
-                    showMessageDialog("Request:\nAreaCode not null!");
+                    showMessageDialog("Request:\nAreaCode not null and AreaCode not equals 2 key!");
                     break;
                 case 2:
                     showMessageDialog("Request:\nAreaName not Null!");
                     break;
                 case 3:
-                    showMessageDialog("Request:\nAreaCode not null!\nAreaName not Null!");
+                    showMessageDialog("Request:\nAreaCode not null and AreaCode not equals 2 key!\nAreaName not Null!");
                     break;
             }
             return test;
@@ -332,6 +333,7 @@ public class ServerControl {
                 centreFrame = new CentreFrame();
                 centreFrame.setVisible(true);
                 centreFrame.addBtnCentreListener(new CentreListener());
+                centreFrame.getTxtAreaCode().setText(areaCode);
                 new CentreListener().showAllCentre();
             }
             else{
@@ -381,19 +383,19 @@ public class ServerControl {
         }
         // Insert Area
         private void insertCentre() {
-            int result = JOptionPane.showConfirmDialog(centreFrame, "CentreID : " + centreID + "\nCentre Name : " + centreName, "Are you insert?", JOptionPane.YES_NO_OPTION);
+            int result = JOptionPane.showConfirmDialog(centreFrame, "CentreName : " + centreName + "\nArea Code : " + areaCode, "Are you insert?", JOptionPane.YES_NO_OPTION);
             if (result == JOptionPane.YES_OPTION) {
-
+                
                 centreDAO = new CentreDAO();
                 try {
-                    centreDAO.insert(new Centre(centreID, centreName));
+                    centreDAO.insert(centreName,areaCode);
                     showMessageDialog("Insert Success!");
                     centreFrame.getTxtId().setText("");
                     centreFrame.getTxtName().setText("");
                     showAllCentre();
                 } catch (SQLException ex) {
                     showMessageDialog("Insert wrong!");
-                    showMessageDialog(ex.toString());
+//                    showMessageDialog(ex.toString());
                     Logger.getLogger(ServerControl.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
@@ -402,17 +404,8 @@ public class ServerControl {
         private boolean testTxtInput() {
             int countTest = 0;
             boolean test = false;
-            try {
-                centreID = Integer.parseInt(centreFrame.getTxtId().getText().trim());
-            } catch (NumberFormatException ex) {
-                countTest = 1;
-            }
             centreName = centreFrame.getTxtName().getText().trim();
 
-            if(centreFrame.getTxtId().getText().trim().isEmpty()){
-                countTest = 1;
-                
-            }
             if (centreName.isEmpty()) {
                 countTest += 2;
             }
@@ -420,14 +413,8 @@ public class ServerControl {
                 case 0:
                     test = true;
                     break;
-                case 1:
-                    showMessageDialog("Request:\nCentre ID is Null or not Number!");
-                    break;
                 case 2:
                     showMessageDialog("Request:\nCentre Name is Null!");
-                    break;
-                case 3:
-                    showMessageDialog("Request:\nCentre ID is null or not Number!!\nCentre Name is Null!");
                     break;
             }
             return test;
@@ -494,9 +481,10 @@ public class ServerControl {
                 @Override
                 public void mousePressed(MouseEvent e) {
                     int row = centreFrame.getTblCentre().getSelectedRow();
-
-                    centreFrame.getTxtId().setText((String) centreFrame.getTblCentre().getValueAt(row, 0));
+                    
+                    centreFrame.getTxtId().setText((String) centreFrame.getTblCentre().getValueAt(row, 0).toString());
                     centreFrame.getTxtName().setText((String) centreFrame.getTblCentre().getValueAt(row, 1));
+                    centreID = Integer.parseInt(centreFrame.getTblCentre().getValueAt(row, 0).toString());
 //                    areaPanel.getTxtCode().setEditable(false);
                 }
             });
