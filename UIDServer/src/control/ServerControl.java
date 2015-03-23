@@ -48,6 +48,7 @@ public class ServerControl {
 
     private AreaDAO areaDAO;
     private String areaCode, areaName;
+    private String areaCodeTemp;
 
     private CentreDAO centreDAO;
     private String centreName;
@@ -226,17 +227,24 @@ public class ServerControl {
         }
 
         private void updateArea() {
+            System.out.println(areaCodeTemp);
+            System.out.println(areaCode);
+            
             int result = JOptionPane.showConfirmDialog(areaPanel, "AreCode : " + areaCode + "\nAreaName : " + areaName, "Are you insert?", JOptionPane.YES_NO_OPTION);
             if (result == JOptionPane.YES_OPTION) {
-
-                areaDAO = new AreaDAO();
-                try {
-                    areaDAO.update(new Area(areaCode, areaName));
-                    showMessageDialog("Update Success!");
-                    showAllArea(); 
-                } catch (SQLException ex) {
-                    showMessageDialog("Update wrong!");
-                    Logger.getLogger(ServerControl.class.getName()).log(Level.SEVERE, null, ex);
+                if(!areaCodeTemp.equals(areaCode)){
+                    showMessageDialog(" You not change Area Code!");
+                }
+                else{
+                    areaDAO = new AreaDAO();
+                    try {
+                        areaDAO.update(new Area(areaCode, areaName));
+                        showMessageDialog("Update Success!");
+                        showAllArea(); 
+                    } catch (SQLException ex) {
+                        showMessageDialog("Update wrong!");
+                        Logger.getLogger(ServerControl.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
         }
@@ -290,6 +298,7 @@ public class ServerControl {
 
                     areaPanel.getTxtCode().setText((String) areaPanel.getTblArea().getValueAt(row, 0));
                     areaPanel.getTxtName().setText((String) areaPanel.getTblArea().getValueAt(row, 1));
+                    areaCodeTemp = (String) areaPanel.getTblArea().getValueAt(row, 0);
 //                    areaPanel.getTxtCode().setEditable(false);
                 }
             });
