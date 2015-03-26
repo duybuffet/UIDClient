@@ -653,7 +653,6 @@ public class ServerControl {
             String[][] nameColumn = {{"Area Code","Area Name"},
                                      {"Centre ID","Centre Name"},
                                      {"Employee ID","Employee Name"}};
-            
             try {
                 HSSFWorkbook wb = new HSSFWorkbook();
                 for (int i = 0; i < nameTableData.length; i++) {
