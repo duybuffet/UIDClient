@@ -8,28 +8,19 @@ package control;
 import common.model.Area;
 import common.model.Centre;
 import common.model.Employee;
-import common.utility.DbConnect;
 import dao.AllDao;
 import dao.AreaDAO;
 import dao.CentreDAO;
 import dao.EmployeeDAO;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,13 +32,14 @@ import javax.swing.table.DefaultTableModel;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 import view.AreaPanel;
 import view.CentreFrame;
+import view.ChartPanel;
 import view.EmployeePanel;
 import view.ExportToExcelPanel;
 import view.LoginPanel;
@@ -79,6 +71,8 @@ public class ServerControl {
     private String centreName;
     private int centreID;
     
+    private ChartPanel chartPanel;
+    
     private HSSFWorkbook wb;
     public ServerControl(ServerFrame serverFrame) {
         initComponents(serverFrame);
@@ -93,6 +87,7 @@ public class ServerControl {
         requestPanel = new RequestPanel();
         menuPanel = new MenuPanel();
         exportToExcelPanel = new ExportToExcelPanel();
+        chartPanel = new ChartPanel();
 
         // set login panel first when main frame is opened
         this.serverFrame.getMainSplitPane().setRightComponent(loginPanel);
@@ -152,6 +147,10 @@ public class ServerControl {
                 new ExportToExcelListener().showAllArea();
                 new ExportToExcelListener().showAllCentre();
                 new ExportToExcelListener().showAllEmployee();
+            }
+            else if (btn == menuPanel.getBtnChart()) {
+                serverFrame.getMainSplitPane().setRightComponent(chartPanel);
+                new ChartArea().showChart();
             }
         }
 
@@ -648,7 +647,7 @@ public class ServerControl {
             String[] nameTableData = {"Area","Centre","Employee"};
             String[] nameTable = {"Areas sheet","Centre sheet","Employee sheet"};
             String[][] nameColumn = {{"Area Code","Area Name"},
-                                     {"Centre ID","Centre Name"},
+                                     {"Centre ID","Area Code","Centre Name"},
                                      {"Employee ID","Employee Name"}};
             try {
                 HSSFWorkbook wb = new HSSFWorkbook();
@@ -656,25 +655,51 @@ public class ServerControl {
                     ResultSet rs = new AllDao().getTables(nameTableData[i]);
                     HSSFSheet sheet = wb.createSheet(nameTable[i]);
                     HSSFRow rowhead = sheet.createRow((short) 0);
-                    rowhead.createCell((short) 0).setCellValue(nameColumn[i][0]);
-                    rowhead.createCell((short) 1).setCellValue(nameColumn[i][1]);
+                    for (int j = 0; j < nameColumn[i].length; j++) {
+                        rowhead.createCell((short) j).setCellValue(nameColumn[i][j]);
+                    }
                     int index = 1;
                     while (rs.next()) {
                         HSSFRow row = sheet.createRow((short) index);
-                        row.createCell((short) 0).setCellValue(rs.getString(1));
-                        row.createCell((short) 1).setCellValue(rs.getString(2));
+                        for (int x = 0; x < nameColumn[i].length; x++) {
+                            row.createCell((short) x).setCellValue(rs.getString(x+1));
+                        }
                         index++;
                     }
                 }
-                FileOutputStream fileOut = new FileOutputStream("G:\\excelFile.xls");
+                FileOutputStream fileOut = new FileOutputStream("D:\\excelFile.xls");
                 wb.write(fileOut);
                 fileOut.close();
-                JOptionPane.showMessageDialog(exportToExcelPanel, "Export file Excel Success ! Folder: G:\\excelFile.xls");
+                JOptionPane.showMessageDialog(exportToExcelPanel, "Export file Excel Success ! Folder: D:\\excelFile.xls");
             } 
             catch (Exception ex) {
                 JOptionPane.showMessageDialog(exportToExcelPanel, "Export file excel Fails!");
                 Logger.getLogger(ServerControl.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+    }
+    public class ChartArea {
+        public void showChart() {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        dataset.setValue(6, "Profit1", "Jane");
+        dataset.setValue(3, "Profit2", "Jane");
+        dataset.setValue(7, "Profit1", "Tom");
+        dataset.setValue(10, "Profit2", "Tom");
+        dataset.setValue(8, "Profit1", "Jill");
+        dataset.setValue(8, "Profit2", "Jill");
+        dataset.setValue(5, "Profit1", "John");
+        dataset.setValue(6, "Profit2", "John");
+        dataset.setValue(12, "Profit1", "Fred");
+        dataset.setValue(5, "Profit2", "Fred");
+        // Profit1, Profit2 represent the row keys
+        // Jane, Tom, Jill, etc. represent the column keys
+        JFreeChart chart = ChartFactory.createBarChart3D( "Comparison between Salesman", 
+        "Salesman", "Value ($)", dataset, PlotOrientation.VERTICAL, true, true, false );
+        chart.setBackgroundPaint(Color.yellow); // Set the background colour of the chart
+        chart.getTitle().setPaint(Color.blue); // Adjust the colour of the title
+        CategoryPlot p = chart.getCategoryPlot(); // Get the Plot object for a bar graph
+        p.setBackgroundPaint(Color.black); // Modify the plot background 
+        p.setRangeGridlinePaint(Color.red);
         }
     }
 }
