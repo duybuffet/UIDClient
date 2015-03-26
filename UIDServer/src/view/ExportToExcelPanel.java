@@ -5,6 +5,7 @@
  */
 package view;
 
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -36,15 +37,16 @@ public class ExportToExcelPanel extends javax.swing.JPanel {
         AreaPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblArea = new javax.swing.JTable();
-        btnAreaExportToExcel = new javax.swing.JButton();
         CentrePanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblCentre = new javax.swing.JTable();
-        btnCentreExportToExcel = new javax.swing.JButton();
         EmployeePanel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblEmployee = new javax.swing.JTable();
-        btnEmployeeExportToExcel = new javax.swing.JButton();
+        btnExportToExcel = new javax.swing.JButton();
+
+        tabPanel.setName(""); // NOI18N
+        tabPanel.setPreferredSize(new java.awt.Dimension(492, 385));
 
         tblArea.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -59,34 +61,18 @@ public class ExportToExcelPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tblArea);
 
-        btnAreaExportToExcel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnAreaExportToExcel.setText("Export to Excel");
-        btnAreaExportToExcel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAreaExportToExcelActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout AreaPanelLayout = new javax.swing.GroupLayout(AreaPanel);
         AreaPanel.setLayout(AreaPanelLayout);
         AreaPanelLayout.setHorizontalGroup(
             AreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AreaPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAreaExportToExcel)
-                .addContainerGap())
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
         );
         AreaPanelLayout.setVerticalGroup(
             AreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AreaPanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnAreaExportToExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 16, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
         );
 
-        tabPanel.addTab("tab1", AreaPanel);
+        tabPanel.addTab("Area", AreaPanel);
 
         tblCentre.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -101,34 +87,18 @@ public class ExportToExcelPanel extends javax.swing.JPanel {
         ));
         jScrollPane2.setViewportView(tblCentre);
 
-        btnCentreExportToExcel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnCentreExportToExcel.setText("Export to Excel");
-        btnCentreExportToExcel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCentreExportToExcelActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout CentrePanelLayout = new javax.swing.GroupLayout(CentrePanel);
         CentrePanel.setLayout(CentrePanelLayout);
         CentrePanelLayout.setHorizontalGroup(
             CentrePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CentrePanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnCentreExportToExcel)
-                .addContainerGap())
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
         );
         CentrePanelLayout.setVerticalGroup(
             CentrePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CentrePanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnCentreExportToExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 16, Short.MAX_VALUE))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
         );
 
-        tabPanel.addTab("tab2", CentrePanel);
+        tabPanel.addTab("Centre", CentrePanel);
 
         tblEmployee.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -143,60 +113,52 @@ public class ExportToExcelPanel extends javax.swing.JPanel {
         ));
         jScrollPane3.setViewportView(tblEmployee);
 
-        btnEmployeeExportToExcel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnEmployeeExportToExcel.setText("Export to Excel");
-        btnEmployeeExportToExcel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEmployeeExportToExcelActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout EmployeePanelLayout = new javax.swing.GroupLayout(EmployeePanel);
         EmployeePanel.setLayout(EmployeePanelLayout);
         EmployeePanelLayout.setHorizontalGroup(
             EmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EmployeePanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnEmployeeExportToExcel)
-                .addContainerGap())
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
         );
         EmployeePanelLayout.setVerticalGroup(
             EmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(EmployeePanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnEmployeeExportToExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 16, Short.MAX_VALUE))
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
         );
 
-        tabPanel.addTab("tab3", EmployeePanel);
+        tabPanel.addTab("Employee", EmployeePanel);
+
+        btnExportToExcel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnExportToExcel.setText("Export To Excel");
+        btnExportToExcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExportToExcelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(tabPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 585, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnExportToExcel)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabPanel)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(tabPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addComponent(btnExportToExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         tabPanel.getAccessibleContext().setAccessibleName("tab 1");
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAreaExportToExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAreaExportToExcelActionPerformed
+    private void btnExportToExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportToExcelActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnAreaExportToExcelActionPerformed
-
-    private void btnCentreExportToExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCentreExportToExcelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnCentreExportToExcelActionPerformed
-
-    private void btnEmployeeExportToExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmployeeExportToExcelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEmployeeExportToExcelActionPerformed
+    }//GEN-LAST:event_btnExportToExcelActionPerformed
 
     public JPanel getAreaPanel() {
         return AreaPanel;
@@ -220,30 +182,6 @@ public class ExportToExcelPanel extends javax.swing.JPanel {
 
     public void setEmployeePanel(JPanel EmployeePanel) {
         this.EmployeePanel = EmployeePanel;
-    }
-
-    public JButton getBtnAreaExportToExcel() {
-        return btnAreaExportToExcel;
-    }
-
-    public void setBtnAreaExportToExcel(JButton btnAreaExportToExcel) {
-        this.btnAreaExportToExcel = btnAreaExportToExcel;
-    }
-
-    public JButton getBtnCentreExportToExcel() {
-        return btnCentreExportToExcel;
-    }
-
-    public void setBtnCentreExportToExcel(JButton btnCentreExportToExcel) {
-        this.btnCentreExportToExcel = btnCentreExportToExcel;
-    }
-
-    public JButton getBtnEmployeeExportToExcel() {
-        return btnEmployeeExportToExcel;
-    }
-
-    public void setBtnEmployeeExportToExcel(JButton btnEmployeeExportToExcel) {
-        this.btnEmployeeExportToExcel = btnEmployeeExportToExcel;
     }
 
     public JTabbedPane getTabPanel() {
@@ -277,15 +215,23 @@ public class ExportToExcelPanel extends javax.swing.JPanel {
     public void setTblEmployee(JTable tblEmployee) {
         this.tblEmployee = tblEmployee;
     }
-    
+
+    public JButton getBtnExportToExcel() {
+        return btnExportToExcel;
+    }
+
+    public void setBtnExportToExcel(JButton btnExportToExcel) {
+        this.btnExportToExcel = btnExportToExcel;
+    }
+    public void addBtnExportToExcelListener(ActionListener log) {
+        btnExportToExcel.addActionListener(log);
+    }        
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AreaPanel;
     private javax.swing.JPanel CentrePanel;
     private javax.swing.JPanel EmployeePanel;
-    private javax.swing.JButton btnAreaExportToExcel;
-    private javax.swing.JButton btnCentreExportToExcel;
-    private javax.swing.JButton btnEmployeeExportToExcel;
+    private javax.swing.JButton btnExportToExcel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

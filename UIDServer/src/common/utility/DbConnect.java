@@ -7,6 +7,8 @@ package common.utility;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,7 +27,7 @@ public class DbConnect {
     public static final String PASSWORD = "1234567";
     public static final String DB_CLASS = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 
-    private DbConnect() {
+    public DbConnect() {
         try {
             Class.forName(DB_CLASS);
         } catch (ClassNotFoundException ex) {
@@ -56,7 +58,15 @@ public class DbConnect {
     public static Connection getConnection() {
         return instance.createConnection();
     }   
-    public static void main(String[] args) {
-        System.out.println(getConnection());
+    /**
+     * This method close connect database
+     * @return
+     * @throws Exception
+     */
+    public void CloseConnection()throws Exception{
+        if(conn!=null){
+            conn.close();
+        }
     }
+
 }

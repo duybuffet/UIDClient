@@ -33,6 +33,7 @@ public class MenuPanel extends javax.swing.JPanel {
         btnEmp = new javax.swing.JButton();
         btnArea = new javax.swing.JButton();
         btnRequest = new javax.swing.JButton();
+        btnExportToExcel = new javax.swing.JButton();
 
         btnEmp.setText("Employee");
 
@@ -46,13 +47,21 @@ public class MenuPanel extends javax.swing.JPanel {
 
         btnRequest.setText("Request");
 
+        btnExportToExcel.setText("Export to Excel");
+        btnExportToExcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExportToExcelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnArea, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(btnEmp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnRequest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnExportToExcel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnArea, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -62,7 +71,9 @@ public class MenuPanel extends javax.swing.JPanel {
                 .addComponent(btnArea, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(174, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnExportToExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(128, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -78,20 +89,35 @@ public class MenuPanel extends javax.swing.JPanel {
         return btnRequest;
     }
 
+    public JButton getBtnExportToExcel() {
+        return btnExportToExcel;
+    }
+
+    public void setBtnExportToExcel(JButton btnExportToExcel) {
+        this.btnExportToExcel = btnExportToExcel;
+    }
+
+
 
     private void btnAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAreaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAreaActionPerformed
 
+    private void btnExportToExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportToExcelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnExportToExcelActionPerformed
+
     public void addBtnMenuListener(ActionListener log) {
         btnArea.addActionListener(log);
         btnEmp.addActionListener(log);
         btnRequest.addActionListener(log);
+        btnExportToExcel.addActionListener(log);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnArea;
     private javax.swing.JButton btnEmp;
+    private javax.swing.JButton btnExportToExcel;
     private javax.swing.JButton btnRequest;
     // End of variables declaration//GEN-END:variables
 }

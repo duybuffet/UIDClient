@@ -16,9 +16,10 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="btnArea" alignment="1" min="-2" pref="99" max="-2" attributes="0"/>
           <Component id="btnEmp" alignment="1" max="32767" attributes="0"/>
           <Component id="btnRequest" alignment="0" max="32767" attributes="0"/>
+          <Component id="btnExportToExcel" alignment="0" max="32767" attributes="0"/>
+          <Component id="btnArea" alignment="1" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -29,7 +30,9 @@
               <Component id="btnArea" min="-2" pref="40" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btnRequest" min="-2" pref="40" max="-2" attributes="0"/>
-              <EmptySpace pref="174" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="btnExportToExcel" min="-2" pref="40" max="-2" attributes="0"/>
+              <EmptySpace pref="128" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -55,6 +58,14 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Request"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnExportToExcel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Export to Excel"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExportToExcelActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

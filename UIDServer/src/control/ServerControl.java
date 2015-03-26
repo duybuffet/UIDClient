@@ -8,6 +8,8 @@ package control;
 import common.model.Area;
 import common.model.Centre;
 import common.model.Employee;
+import common.utility.DbConnect;
+import dao.AllDao;
 import dao.AreaDAO;
 import dao.CentreDAO;
 import dao.EmployeeDAO;
@@ -15,17 +17,39 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import view.AreaPanel;
 import view.CentreFrame;
 import view.EmployeePanel;
+import view.ExportToExcelPanel;
 import view.LoginPanel;
 import view.MenuPanel;
 import view.RequestPanel;
@@ -45,6 +69,7 @@ public class ServerControl {
     private LoginPanel loginPanel;
     private RequestPanel requestPanel;
     private MenuPanel menuPanel;
+    private ExportToExcelPanel exportToExcelPanel;
 
     private AreaDAO areaDAO;
     private String areaCode, areaName;
@@ -54,6 +79,7 @@ public class ServerControl {
     private String centreName;
     private int centreID;
     
+    private HSSFWorkbook wb;
     public ServerControl(ServerFrame serverFrame) {
         initComponents(serverFrame);
     }
@@ -66,6 +92,7 @@ public class ServerControl {
         employeePanel = new EmployeePanel();
         requestPanel = new RequestPanel();
         menuPanel = new MenuPanel();
+        exportToExcelPanel = new ExportToExcelPanel();
 
         // set login panel first when main frame is opened
         this.serverFrame.getMainSplitPane().setRightComponent(loginPanel);
@@ -118,7 +145,13 @@ public class ServerControl {
                 employeePanel.addBtnEmployeeListener(new EmployeeListener());
             } else if (btn == menuPanel.getBtnRequest()) {
                 serverFrame.getMainSplitPane().setRightComponent(requestPanel);
-
+            }
+            else if (btn == menuPanel.getBtnExportToExcel()) {
+                serverFrame.getMainSplitPane().setRightComponent(exportToExcelPanel);
+                exportToExcelPanel.addBtnExportToExcelListener(new ExportToExcelListener());
+                new ExportToExcelListener().showAllArea();
+                new ExportToExcelListener().showAllCentre();
+                new ExportToExcelListener().showAllEmployee();
             }
         }
 
@@ -173,9 +206,6 @@ public class ServerControl {
             // Go to centre
             if(btn == areaPanel.getBtnGoto()){
                 gotoCentre();
-//                centreFrame.dispose();
-//                serverFrame.getMainSplitPane().setRightComponent(centrePanel);
-                
             }
         }
         // Insert Area
@@ -281,7 +311,6 @@ public class ServerControl {
                 try {
                     areaDAO.delete(new Area(areaCode, areaName));
                     showMessageDialog("Delete Success!");
-                    JOptionPane.showMessageDialog(areaPanel, "Delete Success!");
                     showAllArea();
                 } catch (SQLException ex) {
                     showMessageDialog("Delete wrong!");
@@ -548,5 +577,108 @@ public class ServerControl {
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
 
+    }
+    class ExportToExcelListener implements ActionListener,ChangeListener {
+
+        @Override
+        public void stateChanged(ChangeEvent e) {
+            int index = exportToExcelPanel.getTabPanel().getSelectedIndex();
+            if(index == 0){
+//                showAllArea();
+            }
+            if(index == 1){
+//                showAllCentre();
+            }
+            if(index == 2){
+//                showAllArea();
+            }
+        }
+        private void showAllArea() {
+            areaDAO = new AreaDAO();
+            ArrayList<Area> listArae = new ArrayList<>();
+            try {
+                listArae = areaDAO.selectAll();
+                Vector tblRecords = new Vector();
+                Vector tblTitle = new Vector();
+                tblTitle.add("Area Code");
+                tblTitle.add("Area Name");
+
+                for (Area ls : listArae) {
+                    Vector record = new Vector();
+                    record.add(ls.getAreaCode());
+                    record.add(ls.getAreaName());
+                    tblRecords.add(record);
+                }
+                exportToExcelPanel.getTblArea().setModel(new DefaultTableModel(tblRecords, tblTitle));
+            } catch (SQLException ex) {
+                Logger.getLogger(ServerControl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        private void showAllCentre() {
+            centreDAO = new CentreDAO();
+            ArrayList<Centre> listCentre = new ArrayList<>();
+            try {
+                listCentre = centreDAO.selectAll();
+                Vector tblRecords = new Vector();
+                Vector tblTitle = new Vector();
+                tblTitle.add("Centre ID");
+                tblTitle.add("Centre Name");
+
+                for (Centre lc : listCentre) {
+                    Vector record = new Vector();
+                    record.add(lc.getCentreId());
+                    record.add(lc.getCentreName());
+                    tblRecords.add(record);
+                }
+                exportToExcelPanel.getTblCentre().setModel(new DefaultTableModel(tblRecords, tblTitle));
+            } catch (SQLException ex) {
+                Logger.getLogger(ServerControl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        private void showAllEmployee() {
+        
+        }
+        
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JButton btn = (JButton) e.getSource();
+            if (btn == exportToExcelPanel.getBtnExportToExcel()) {
+                ExportToExcel();        
+            }
+        }
+        private void ExportToExcel() {
+            String[] nameTableData = {"Area","Centre","Employee"};
+            String[] nameTable = {"Areas sheet","Centre sheet","Employee sheet"};
+            String[][] nameColumn = {{"Area Code","Area Name"},
+                                     {"Centre ID","Centre Name"},
+                                     {"Employee ID","Employee Name"}};
+            
+            try {
+                HSSFWorkbook wb = new HSSFWorkbook();
+                for (int i = 0; i < nameTableData.length; i++) {
+                    ResultSet rs = new AllDao().getTables(nameTableData[i]);
+                    HSSFSheet sheet = wb.createSheet(nameTable[i]);
+                    HSSFRow rowhead = sheet.createRow((short) 0);
+                    rowhead.createCell((short) 0).setCellValue(nameColumn[i][0]);
+                    rowhead.createCell((short) 1).setCellValue(nameColumn[i][1]);
+                    int index = 1;
+                    while (rs.next()) {
+                        HSSFRow row = sheet.createRow((short) index);
+                        row.createCell((short) 0).setCellValue(rs.getString(1));
+                        row.createCell((short) 1).setCellValue(rs.getString(2));
+                        index++;
+                    }
+                }
+                FileOutputStream fileOut = new FileOutputStream("G:\\excelFile.xls");
+                wb.write(fileOut);
+                fileOut.close();
+                JOptionPane.showMessageDialog(exportToExcelPanel, "Export file Excel Success ! Folder: G:\\excelFile.xls");
+            } 
+            catch (Exception ex) {
+                JOptionPane.showMessageDialog(exportToExcelPanel, "Export file Excel Fails!");
+                Logger.getLogger(ServerControl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 }
