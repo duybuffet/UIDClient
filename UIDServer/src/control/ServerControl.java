@@ -555,7 +555,6 @@ public class ServerControl {
                 Logger.getLogger(ServerControl.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-
         private void showMessageDialog(String message) {
             JOptionPane.showMessageDialog(centreFrame, message);
         }

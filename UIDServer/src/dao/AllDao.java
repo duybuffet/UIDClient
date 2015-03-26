@@ -19,6 +19,7 @@ public class AllDao {
     }
     
     public ResultSet getTables(String nameTable) throws Exception{
+        
         String query = "SELECT * FROM "+nameTable;
         PreparedStatement ps = DbConnect.getConnection().prepareStatement(query);
         ResultSet rs = ps.executeQuery();

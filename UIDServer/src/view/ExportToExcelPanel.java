@@ -219,7 +219,6 @@ public class ExportToExcelPanel extends javax.swing.JPanel {
     public JButton getBtnExportToExcel() {
         return btnExportToExcel;
     }
-
     public void setBtnExportToExcel(JButton btnExportToExcel) {
         this.btnExportToExcel = btnExportToExcel;
     }
