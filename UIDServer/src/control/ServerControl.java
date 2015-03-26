@@ -639,7 +639,6 @@ public class ServerControl {
         private void showAllEmployee() {
         
         }
-        
         @Override
         public void actionPerformed(ActionEvent e) {
             JButton btn = (JButton) e.getSource();
@@ -675,7 +674,7 @@ public class ServerControl {
                 JOptionPane.showMessageDialog(exportToExcelPanel, "Export file Excel Success ! Folder: G:\\excelFile.xls");
             } 
             catch (Exception ex) {
-                JOptionPane.showMessageDialog(exportToExcelPanel, "Export file Excel Fails!");
+                JOptionPane.showMessageDialog(exportToExcelPanel, "Export file excel Fails!");
                 Logger.getLogger(ServerControl.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
