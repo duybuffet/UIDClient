@@ -75,11 +75,11 @@ public class ClientControl {
             JButton btn = (JButton)e.getSource();
             if (btn == optionPanel.getBtnRegister()) {
                 clientFrame.setContentPane(registerPanel);
-//                registerPanel.addBtnListener(new RegisterListener());
+                registerPanel.addBtnListener(new RegisterListener());
 //                clientFrame.showMessage("register");
             } else if (btn == optionPanel.getBtnSearch()) {                
                 clientFrame.setContentPane(searchPanel);
-//                searchPanel.addBtnListener(new SearchListener());
+                searchPanel.addBtnListener(new SearchListener());
 //                clientFrame.showMessage("search");
             }
         }
