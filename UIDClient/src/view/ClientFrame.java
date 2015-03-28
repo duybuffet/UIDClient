@@ -1,24 +1,37 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 package view;
 
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import javax.swing.JOptionPane;
+import remote.RMICitizenAction;
 
 /**
  *
- * @author ASUS_PC
+ * @author Duy Buffet
  */
 public class ClientFrame extends javax.swing.JFrame {
+
+    private static final int SERVER_PORT = 8989;
+    private static final String SERVER_HOST = "localhost";
+    private static final String RMI_SERVICE = "RMIClientAction";
+    private Registry registry;
+    private RMICitizenAction remoteObject;
 
     /**
      * Creates new form ClientFrame
      */
     public ClientFrame() {
         initComponents();
-        setTitle("Client");
+        this.tbMainPane.add("Register", new RegisterPanel());
+        this.tbMainPane.add("Search", new SearchPanel());
+        setResizable(false);
+        connectServer();
     }
 
     /**
@@ -30,26 +43,40 @@ public class ClientFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        tbMainPane = new javax.swing.JTabbedPane();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 470, Short.MAX_VALUE)
+            .addComponent(tbMainPane, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
+            .addComponent(tbMainPane, javax.swing.GroupLayout.DEFAULT_SIZE, 665, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void showMessage(String msg) {
-        JOptionPane.showMessageDialog(this, msg);
-    }
+    /**
+     * @param args the command line arguments
+     */    
 
+    private void connectServer() {
+        try {
+            registry = LocateRegistry.getRegistry(SERVER_HOST, SERVER_PORT);
+            remoteObject = (RMICitizenAction) registry.lookup(RMI_SERVICE);
+            this.setTitle(this.getTitle() + ". SERVER: RUNNING");
+        } catch (RemoteException ex) {
+            JOptionPane.showMessageDialog(this, "Server has not started already! Please close this application!");
+        } catch (NotBoundException ex) {
+            JOptionPane.showMessageDialog(this, "Server has not started already! Please close this application!");
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTabbedPane tbMainPane;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,7 +5,6 @@
  */
 package run;
 
-import control.ClientControl;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -47,10 +46,9 @@ public class Test {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                ClientFrame view = new ClientFrame();
-                view.setVisible(true);
-                view.setResizable(false);
-                ClientControl control = new ClientControl(view);
+                ClientFrame client = new ClientFrame();
+                client.setVisible(true);
+                
                 // test github dang hung
             }
         });
