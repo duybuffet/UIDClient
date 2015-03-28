@@ -4,11 +4,13 @@
  */
 package view;
 
+import de.javasoft.plaf.synthetica.SyntheticaClassyLookAndFeel;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 import remote.RMICitizenAction;
 
 /**
@@ -32,6 +34,11 @@ public class ClientFrame extends javax.swing.JFrame {
         this.tbMainPane.add("Search", new SearchPanel());
         setResizable(false);
         connectServer();
+        try {
+            UIManager.setLookAndFeel(new SyntheticaClassyLookAndFeel());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
