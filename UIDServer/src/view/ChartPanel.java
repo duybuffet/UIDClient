@@ -5,8 +5,6 @@
  */
 package view;
 
-import control.ServerControl.ChartArea;
-
 /**
  *
  * @author DH
@@ -18,7 +16,6 @@ public class ChartPanel extends javax.swing.JPanel {
      */
     public ChartPanel() {
         initComponents();
-//        new ChartArea().createChart();
     }
 
     /**
@@ -47,5 +44,5 @@ public class ChartPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
-
+    
 }
