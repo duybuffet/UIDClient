@@ -1,0 +1,37 @@
+04/04/2014 V2.9.7
+- Added menuBar background color for proper support of opaque menu bars.
+
+------------------------------------------------------------------------------- 
+
+10/10/2013 V2.9.6
+- Fixed ToolBarPainter issue in conjunction with third party components.
+
+------------------------------------------------------------------------------- 
+
+06/26/2013 V2.9.5
+- Fixed IllegalArgumentException for TitledBorder on very large panels.
+
+------------------------------------------------------------------------------- 
+
+03/17/2013 V2.9.4
+- ToolBar artifacts can appear when used together with internal frames.
+
+------------------------------------------------------------------------------- 
+
+02/06/2013 V2.9.3
+- Fixed ComboBox list entry size issue for null values.
+
+------------------------------------------------------------------------------- 
+
+09/15/2012 V2.9.2
+- Fixed menubar background for native window decoration.
+
+------------------------------------------------------------------------------- 
+
+05/18/2012 V2.9.1
+- ToolBarPainter modification for being JIDE compatible.
+
+------------------------------------------------------------------------------- 
+
+04/25/2012 V2.9.0
+- First official release.
