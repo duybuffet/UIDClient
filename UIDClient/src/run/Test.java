@@ -36,10 +36,15 @@ public class Test {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                ClientFrame client = new ClientFrame();
-                client.setVisible(true);
-                
-                // test github dang hung
+                try {
+                    Thread.sleep(5000);
+                    ClientFrame client = new ClientFrame();
+                    client.setVisible(true);
+                    
+                    // test github dang hung
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
