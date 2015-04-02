@@ -5,11 +5,12 @@
  */
 package run;
 
-import de.javasoft.plaf.synthetica.SyntheticaClassyLookAndFeel;
+//import de.javasoft.plaf.synthetica.SyntheticaClassyLookAndFeel;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.plaf.metal.MetalLookAndFeel;
 import view.ClientFrame;
 
 /**
@@ -25,7 +26,7 @@ public class Test {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
-            UIManager.setLookAndFeel(new SyntheticaClassyLookAndFeel());
+            UIManager.setLookAndFeel(new MetalLookAndFeel() );
         } catch (Exception e) {
             e.printStackTrace();
         }
