@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package view;
 
 import common.model.PersonDetails;
@@ -163,43 +162,42 @@ public class SearchPanel extends javax.swing.JPanel {
         String status = "";
         try {
             // TODO add your handling code here:
-            if(testTxtInput() != false){
-                ArrayList<PersonDetails> listPerson = new ArrayList<>();
-                listPerson = ClientFrame.remoteObject.search(lName.getText(), mName.getText(), fName.getText());
-                Vector tblRecords = new Vector();
-                Vector tblTitle = new Vector();
-                tblTitle.add("Full name");
-                tblTitle.add("Gender");
-                tblTitle.add("Email");
-                tblTitle.add("Address");
-                tblTitle.add("UID");
-                tblTitle.add("Status");
-                for (PersonDetails ls : listPerson) {
-                    Vector record = new Vector();
-                    record.add(ls.getLastName()+ls.getMiddleName()+ls.getFirstName());
-                    record.add(ls.getGender() == 0 ? "Female":"Male");
-                    record.add(ls.getEmail());
-                    record.add(ls.getAddress());
-                    record.add(ls.getUid());
-                    switch (ls.getStatus()) {
-                        case 1:
-                            status = "Actived";
-                            break;
-                        case 2:
-                            status = "Denied";
-                            break;
-                        case 0:
-                            status = "UnActived";
-                            break;
-                        default:
-                            break;
-                    }
-                    record.add(status);
-                    tblRecords.add(record);
+            ArrayList<PersonDetails> listPerson = new ArrayList<>();
+            listPerson = ClientFrame.remoteObject.search(lName.getText(), mName.getText(), fName.getText());
+            Vector tblRecords = new Vector();
+            Vector tblTitle = new Vector();
+            tblTitle.add("Full name");
+            tblTitle.add("Gender");
+            tblTitle.add("Email");
+            tblTitle.add("Address");
+            tblTitle.add("UID");
+            tblTitle.add("Status");
+            for (PersonDetails ls : listPerson) {
+                Vector record = new Vector();
+                record.add(ls.getLastName() + ls.getMiddleName() + ls.getFirstName());
+                record.add(ls.getGender() == 0 ? "Female" : "Male");
+                record.add(ls.getEmail());
+                record.add(ls.getAddress());
+                record.add(ls.getUid());
+                switch (ls.getStatus()) {
+                    case 1:
+                        status = "Actived";
+                        break;
+                    case 2:
+                        status = "Denied";
+                        break;
+                    case 0:
+                        status = "UnActived";
+                        break;
+                    default:
+                        break;
                 }
-                tblSearch.setModel(new DefaultTableModel(tblRecords, tblTitle));
+                record.add(status);
+                tblRecords.add(record);
             }
-            
+            showMessage("There are (is) " + listPerson.size() + " results(result)");
+            tblSearch.setModel(new DefaultTableModel(tblRecords, tblTitle));
+
         } catch (RemoteException ex) {
             Logger.getLogger(SearchPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -220,7 +218,7 @@ public class SearchPanel extends javax.swing.JPanel {
     public JButton getBtnSearch() {
         return btnSearch;
     }
-    
+
     public void showMessage(String msg) {
         JOptionPane.showMessageDialog(this, msg);
     }
@@ -240,47 +238,47 @@ public class SearchPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private boolean testTxtInput() {
-        String tlName,tmName,tfName;
+        String tlName, tmName, tfName;
         int countTest = 0;
-            boolean test = false;
-            tlName = lName.getText().trim();
-            tmName = mName.getText().trim();
-            tfName = fName.getText().trim();
-            
-            if (tlName.isEmpty()) {
-                countTest += 1;
-            }
-            if (tmName.isEmpty()) {
-                countTest += 2;
-            }
-            if (tfName.isEmpty()) {
-                countTest += 4;
-            }
-            switch (countTest) {
-                case 0:
-                    test = true;
-                    break;
-                case 1:
-                    JOptionPane.showMessageDialog(this,"Request:\nLast Name must not null!");
-                    break;
-                case 2:
-                    JOptionPane.showMessageDialog(this,"Request:\nMiddleName must not Null!");
-                    break;
-                case 4:
-                    JOptionPane.showMessageDialog(this,"Request:\nFirst Name must not Null!");
-                    break;
-                case 3:
-                    JOptionPane.showMessageDialog(this,"Request:\nLast Name must not null!\nMiddle Name must not Null!");
-                    break;
-                case 5:
-                    JOptionPane.showMessageDialog(this,"Request:\nLast Name must not null!\nFirst Name must not Null!");
-                    break;
-                case 6:
-                    JOptionPane.showMessageDialog(this,"Request:\nMiddle Name must not null!\nFirst Name must not Null!");
-                    break;
-                default:
-                    System.out.println("");
-            }
-            return test;
+        boolean test = false;
+        tlName = lName.getText().trim();
+        tmName = mName.getText().trim();
+        tfName = fName.getText().trim();
+
+        if (tlName.isEmpty()) {
+            countTest += 1;
+        }
+        if (tmName.isEmpty()) {
+            countTest += 2;
+        }
+        if (tfName.isEmpty()) {
+            countTest += 4;
+        }
+        switch (countTest) {
+            case 0:
+                test = true;
+                break;
+            case 1:
+                JOptionPane.showMessageDialog(this, "Request:\nLast Name must not null!");
+                break;
+            case 2:
+                JOptionPane.showMessageDialog(this, "Request:\nMiddleName must not Null!");
+                break;
+            case 4:
+                JOptionPane.showMessageDialog(this, "Request:\nFirst Name must not Null!");
+                break;
+            case 3:
+                JOptionPane.showMessageDialog(this, "Request:\nLast Name must not null!\nMiddle Name must not Null!");
+                break;
+            case 5:
+                JOptionPane.showMessageDialog(this, "Request:\nLast Name must not null!\nFirst Name must not Null!");
+                break;
+            case 6:
+                JOptionPane.showMessageDialog(this, "Request:\nMiddle Name must not null!\nFirst Name must not Null!");
+                break;
+            default:
+                System.out.println("");
+        }
+        return test;
     }
 }

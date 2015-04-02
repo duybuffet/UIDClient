@@ -6,7 +6,11 @@
 
 package view;
 
-import control.DateLabelFormatter;
+import com.utility.DateLabelFormatter;
+import common.model.PersonDetails;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
@@ -35,7 +39,6 @@ public class RegisterPanel extends javax.swing.JPanel {
 
 //		datePicker = new JDatePickerImpl(datePanel);
         datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
-
         this.birthdayPanel.add(datePicker);
     }
 
@@ -547,8 +550,12 @@ public class RegisterPanel extends javax.swing.JPanel {
     }
 
     private void insertDatabase() {
-//        PersonDetailsDAO pDao = new PersonDetailsDao();
-//        ClientFrame.remoteObject.sendRequest(null, WIDTH);
+        try {
+            ClientFrame.remoteObject.sendRequest(returnObj(), 0);
+            showMessage("Register success!!! We will contact with you soon.");
+        } catch (RemoteException ex) {
+            showMessage("There was a error. Sorry for this unconvenienc");
+        }
     }
 
     private boolean checkEmail(String email) {
@@ -571,7 +578,27 @@ public class RegisterPanel extends javax.swing.JPanel {
         if(match.find()){
             check =  true;
         }
-        System.out.println(check);
         return check;
     }
+    
+    public PersonDetails returnObj() {
+        PersonDetails pd = null;
+        String fName = tfFName.getText().trim();
+        String mName = tfMName.getText().trim();
+        String lName = tfLName.getText().trim();
+        String dob = datePicker.getJFormattedTextField().getText().trim();
+        int gender = (rdoGMale.isSelected()) ? 1 : 0;
+        String email = tfEmail.getText().trim();
+        String edu = tfEducation.getText().trim();
+        String ocu = tfOccupation.getText().trim();
+        String addr = taAddress.getText().trim();
+        String contact = taContact.getText().trim();
+        int marital = (rdoMMarried.isSelected()) ? 1 : 0;
+        int addrProof = (rdoAdYes.isSelected()) ? 1 : 0;
+        String citizenProof = (rdoCiYes.isSelected()) ? "Yes" : "Not Yet";
+        int physical  = (rdoPhNormal.isSelected()) ? 1 : 0;
+        pd = new PersonDetails("", 0, fName, mName, lName, dob, gender, email, addr, edu, ocu, marital, addrProof, citizenProof);
+        return pd;
+    }
+
 }

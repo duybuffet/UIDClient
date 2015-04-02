@@ -75,10 +75,14 @@ public class ClientFrame extends javax.swing.JFrame {
             remoteObject = (RMICitizenAction) registry.lookup(RMI_SERVICE);
             this.setTitle(this.getTitle() + ". SERVER: RUNNING");
         } catch (RemoteException ex) {
-            JOptionPane.showMessageDialog(this, "Server has not started already! Please close this application!");
+            showMessage("Server has not started already! Please close this application!");
         } catch (NotBoundException ex) {
-            JOptionPane.showMessageDialog(this, "Server has not started already! Please close this application!");
+            showMessage("Server has not started already! Please close this application!");
         }
+    }
+    
+    public void showMessage(String msg) {
+        JOptionPane.showMessageDialog(this, msg);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane tbMainPane;
