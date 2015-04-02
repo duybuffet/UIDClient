@@ -5,6 +5,7 @@
 package view;
 
 //import de.javasoft.plaf.synthetica.SyntheticaClassyLookAndFeel;
+import de.javasoft.plaf.synthetica.SyntheticaClassyLookAndFeel;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -23,7 +24,7 @@ public class ClientFrame extends javax.swing.JFrame {
     private static final String SERVER_HOST = "localhost";
     private static final String RMI_SERVICE = "RMIClientAction";
     private Registry registry;
-    private RMICitizenAction remoteObject;
+    protected static RMICitizenAction remoteObject;
 
     /**
      * Creates new form ClientFrame
@@ -33,12 +34,8 @@ public class ClientFrame extends javax.swing.JFrame {
         this.tbMainPane.add("Register", new RegisterPanel());
         this.tbMainPane.add("Search", new SearchPanel());
         setResizable(false);
+        this.setLocationRelativeTo(null);        
         connectServer();
-//        try {
-//            UIManager.setLookAndFeel(new SyntheticaClassyLookAndFeel());
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
     }
 
     /**
@@ -58,11 +55,11 @@ public class ClientFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tbMainPane, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
+            .addComponent(tbMainPane, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tbMainPane, javax.swing.GroupLayout.DEFAULT_SIZE, 665, Short.MAX_VALUE)
+            .addComponent(tbMainPane, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
         );
 
         pack();
@@ -78,10 +75,14 @@ public class ClientFrame extends javax.swing.JFrame {
             remoteObject = (RMICitizenAction) registry.lookup(RMI_SERVICE);
             this.setTitle(this.getTitle() + ". SERVER: RUNNING");
         } catch (RemoteException ex) {
-            JOptionPane.showMessageDialog(this, "Server has not started already! Please close this application!");
+            showMessage("Server has not started already! Please close this application!");
         } catch (NotBoundException ex) {
-            JOptionPane.showMessageDialog(this, "Server has not started already! Please close this application!");
+            showMessage("Server has not started already! Please close this application!");
         }
+    }
+    
+    public void showMessage(String msg) {
+        JOptionPane.showMessageDialog(this, msg);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane tbMainPane;

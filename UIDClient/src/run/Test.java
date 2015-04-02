@@ -5,8 +5,10 @@
  */
 package run;
 
+import de.javasoft.plaf.synthetica.SyntheticaClassyLookAndFeel;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import view.ClientFrame;
 
@@ -22,22 +24,10 @@ public class Test {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-
-        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-            if ("Windows".equals(info.getName())) {
-                try {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (InstantiationException ex) {
-                    Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (IllegalAccessException ex) {
-                    Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (UnsupportedLookAndFeelException ex) {
-                    Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+        try {
+            UIManager.setLookAndFeel(new SyntheticaClassyLookAndFeel());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         //</editor-fold>
