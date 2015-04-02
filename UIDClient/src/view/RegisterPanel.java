@@ -95,6 +95,7 @@ public class RegisterPanel extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         taAddress = new javax.swing.JTextArea();
         jLabel16 = new javax.swing.JLabel();
+        jSpinner1 = new javax.swing.JSpinner();
 
         setLayout(null);
 
@@ -103,15 +104,17 @@ public class RegisterPanel extends javax.swing.JPanel {
         add(jLabel1);
         jLabel1.setBounds(194, 11, 126, 22);
 
+        jLabel2.setForeground(new java.awt.Color(51, 51, 0));
         jLabel2.setText("First Name:");
         add(jLabel2);
-        jLabel2.setBounds(58, 54, 55, 14);
+        jLabel2.setBounds(50, 50, 70, 20);
         add(tfFName);
-        tfFName.setBounds(123, 51, 54, 20);
+        tfFName.setBounds(123, 51, 70, 20);
 
+        jLabel3.setForeground(new java.awt.Color(51, 51, 0));
         jLabel3.setText("Last Name:");
         add(jLabel3);
-        jLabel3.setBounds(362, 54, 54, 14);
+        jLabel3.setBounds(360, 50, 70, 20);
 
         tfLName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -119,29 +122,36 @@ public class RegisterPanel extends javax.swing.JPanel {
             }
         });
         add(tfLName);
-        tfLName.setBounds(426, 51, 50, 20);
+        tfLName.setBounds(426, 51, 70, 20);
 
+        jLabel4.setForeground(new java.awt.Color(51, 51, 0));
         jLabel4.setText("Date of Birth:");
         add(jLabel4);
-        jLabel4.setBounds(58, 89, 65, 14);
+        jLabel4.setBounds(50, 90, 80, 20);
 
+        jLabel5.setForeground(new java.awt.Color(51, 51, 0));
         jLabel5.setText("Gender");
         add(jLabel5);
-        jLabel5.setBounds(58, 125, 35, 14);
+        jLabel5.setBounds(50, 120, 50, 20);
 
+        rdoGMale.setBackground(new java.awt.Color(164, 230, 169));
         buttonGroup1.add(rdoGMale);
+        rdoGMale.setForeground(new java.awt.Color(51, 51, 0));
         rdoGMale.setText("Male");
         add(rdoGMale);
-        rdoGMale.setBounds(189, 121, 47, 23);
+        rdoGMale.setBounds(186, 121, 60, 23);
 
+        rdoGFemale.setBackground(new java.awt.Color(164, 230, 169));
         buttonGroup1.add(rdoGFemale);
+        rdoGFemale.setForeground(new java.awt.Color(51, 51, 0));
         rdoGFemale.setText("Female");
         add(rdoGFemale);
-        rdoGFemale.setBounds(254, 121, 59, 23);
+        rdoGFemale.setBounds(254, 121, 80, 23);
 
+        jLabel6.setForeground(new java.awt.Color(51, 51, 0));
         jLabel6.setText("Contact Details:");
         add(jLabel6);
-        jLabel6.setBounds(58, 175, 77, 14);
+        jLabel6.setBounds(50, 170, 90, 20);
 
         taContact.setColumns(20);
         taContact.setRows(5);
@@ -150,60 +160,76 @@ public class RegisterPanel extends javax.swing.JPanel {
         add(jScrollPane1);
         jScrollPane1.setBounds(189, 162, 215, 77);
 
+        jLabel7.setForeground(new java.awt.Color(51, 51, 0));
         jLabel7.setText("Email:");
         add(jLabel7);
-        jLabel7.setBounds(58, 246, 28, 14);
+        jLabel7.setBounds(50, 240, 50, 20);
         add(tfEmail);
         tfEmail.setBounds(189, 245, 215, 20);
 
+        jLabel8.setForeground(new java.awt.Color(51, 51, 0));
         jLabel8.setText("Address:");
         add(jLabel8);
-        jLabel8.setBounds(58, 286, 43, 14);
+        jLabel8.setBounds(50, 290, 60, 20);
 
+        jLabel9.setForeground(new java.awt.Color(51, 51, 0));
         jLabel9.setText("Education Qualification:");
         add(jLabel9);
-        jLabel9.setBounds(58, 371, 113, 14);
+        jLabel9.setBounds(50, 370, 140, 20);
         add(tfEducation);
         tfEducation.setBounds(189, 371, 215, 20);
 
+        jLabel10.setForeground(new java.awt.Color(51, 51, 0));
         jLabel10.setText("Occupation:");
         add(jLabel10);
-        jLabel10.setBounds(58, 409, 58, 14);
+        jLabel10.setBounds(50, 410, 70, 20);
         add(tfOccupation);
         tfOccupation.setBounds(189, 409, 215, 20);
 
+        jLabel11.setForeground(new java.awt.Color(51, 51, 0));
         jLabel11.setText("Marital Status:");
         add(jLabel11);
-        jLabel11.setBounds(58, 448, 70, 14);
+        jLabel11.setBounds(50, 440, 100, 30);
 
+        rdoMMarried.setBackground(new java.awt.Color(96, 183, 78));
         buttonGroup2.add(rdoMMarried);
+        rdoMMarried.setForeground(new java.awt.Color(51, 51, 0));
         rdoMMarried.setText("Married");
         add(rdoMMarried);
-        rdoMMarried.setBounds(189, 444, 61, 23);
+        rdoMMarried.setBounds(189, 444, 70, 23);
 
+        rdoMSingle.setBackground(new java.awt.Color(89, 180, 84));
         buttonGroup2.add(rdoMSingle);
+        rdoMSingle.setForeground(new java.awt.Color(51, 51, 0));
         rdoMSingle.setText("Single");
         add(rdoMSingle);
-        rdoMSingle.setBounds(279, 444, 53, 23);
+        rdoMSingle.setBounds(279, 444, 70, 23);
 
+        jLabel12.setForeground(new java.awt.Color(51, 51, 0));
         jLabel12.setText("Address Proof:");
         add(jLabel12);
-        jLabel12.setBounds(58, 489, 72, 14);
+        jLabel12.setBounds(50, 490, 80, 20);
 
+        jLabel13.setForeground(new java.awt.Color(51, 51, 0));
         jLabel13.setText("Citizen Proof:");
         add(jLabel13);
-        jLabel13.setBounds(58, 530, 65, 14);
+        jLabel13.setBounds(50, 530, 80, 20);
 
+        jLabel14.setForeground(new java.awt.Color(51, 51, 0));
         jLabel14.setText("Physical Health:");
         add(jLabel14);
-        jLabel14.setBounds(58, 571, 76, 14);
+        jLabel14.setBounds(50, 570, 90, 20);
 
+        rdoPhNormal.setBackground(new java.awt.Color(59, 131, 55));
         buttonGroup5.add(rdoPhNormal);
+        rdoPhNormal.setForeground(new java.awt.Color(51, 51, 0));
         rdoPhNormal.setText("Normal");
         add(rdoPhNormal);
-        rdoPhNormal.setBounds(189, 567, 59, 23);
+        rdoPhNormal.setBounds(189, 567, 80, 23);
 
+        rdoPhHandicapped.setBackground(new java.awt.Color(59, 126, 51));
         buttonGroup5.add(rdoPhHandicapped);
+        rdoPhHandicapped.setForeground(new java.awt.Color(51, 51, 0));
         rdoPhHandicapped.setText("Handicapped");
         add(rdoPhHandicapped);
         rdoPhHandicapped.setBounds(279, 567, 173, 23);
@@ -215,7 +241,7 @@ public class RegisterPanel extends javax.swing.JPanel {
             }
         });
         add(btnSubmit);
-        btnSubmit.setBounds(120, 592, 89, 32);
+        btnSubmit.setBounds(120, 600, 89, 32);
 
         btnReset.setText("Reset");
         btnReset.addActionListener(new java.awt.event.ActionListener() {
@@ -224,33 +250,44 @@ public class RegisterPanel extends javax.swing.JPanel {
             }
         });
         add(btnReset);
-        btnReset.setBounds(303, 592, 88, 32);
+        btnReset.setBounds(300, 600, 88, 32);
 
+        jLabel15.setForeground(new java.awt.Color(51, 51, 0));
         jLabel15.setText("Mid Name :");
         add(jLabel15);
-        jLabel15.setBounds(198, 54, 53, 14);
+        jLabel15.setBounds(200, 50, 70, 20);
         add(tfMName);
-        tfMName.setBounds(261, 51, 53, 20);
+        tfMName.setBounds(270, 50, 70, 20);
 
+        rdoAdYes.setBackground(new java.awt.Color(56, 134, 59));
         buttonGroup3.add(rdoAdYes);
+        rdoAdYes.setForeground(new java.awt.Color(51, 51, 0));
         rdoAdYes.setText("Yes");
         add(rdoAdYes);
-        rdoAdYes.setBounds(189, 485, 43, 23);
+        rdoAdYes.setBounds(189, 485, 60, 23);
 
+        rdoAdNo.setBackground(new java.awt.Color(82, 157, 74));
         buttonGroup3.add(rdoAdNo);
+        rdoAdNo.setForeground(new java.awt.Color(51, 51, 0));
         rdoAdNo.setText("No");
         add(rdoAdNo);
-        rdoAdNo.setBounds(279, 485, 39, 23);
+        rdoAdNo.setBounds(279, 485, 50, 23);
 
+        rdoCiYes.setBackground(new java.awt.Color(44, 115, 45));
         buttonGroup4.add(rdoCiYes);
+        rdoCiYes.setForeground(new java.awt.Color(51, 51, 0));
         rdoCiYes.setText("Yes");
         add(rdoCiYes);
-        rdoCiYes.setBounds(189, 526, 43, 23);
+        rdoCiYes.setBounds(189, 526, 60, 23);
 
+        rdoCiNo.setBackground(new java.awt.Color(59, 131, 55));
         buttonGroup4.add(rdoCiNo);
+        rdoCiNo.setForeground(new java.awt.Color(51, 51, 0));
         rdoCiNo.setText("No");
         add(rdoCiNo);
-        rdoCiNo.setBounds(279, 526, 39, 23);
+        rdoCiNo.setBounds(279, 526, 50, 23);
+
+        birthdayPanel.setBackground(new java.awt.Color(180, 234, 184));
         add(birthdayPanel);
         birthdayPanel.setBounds(180, 89, 300, 30);
 
@@ -264,6 +301,8 @@ public class RegisterPanel extends javax.swing.JPanel {
         jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/green-design.png"))); // NOI18N
         add(jLabel16);
         jLabel16.setBounds(0, -6, 520, 650);
+        add(jSpinner1);
+        jSpinner1.setBounds(660, 300, 29, 20);
     }// </editor-fold>//GEN-END:initComponents
 
     private void tfLNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfLNameActionPerformed
@@ -335,6 +374,7 @@ public class RegisterPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JRadioButton rdoAdNo;
     private javax.swing.JRadioButton rdoAdYes;
     private javax.swing.JRadioButton rdoCiNo;

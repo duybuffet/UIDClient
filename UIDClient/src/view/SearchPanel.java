@@ -62,7 +62,7 @@ public class SearchPanel extends javax.swing.JPanel {
 
         jLabel2.setText("Enter your Info:");
         add(jLabel2);
-        jLabel2.setBounds(76, 96, 78, 14);
+        jLabel2.setBounds(60, 94, 78, 20);
 
         btnSearch.setText("Search ");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
