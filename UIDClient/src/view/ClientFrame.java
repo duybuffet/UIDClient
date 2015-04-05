@@ -31,11 +31,11 @@ public class ClientFrame extends javax.swing.JFrame {
      */
     public ClientFrame() {
         initComponents();
+        connectServer();
         this.tbMainPane.add("Register", new RegisterPanel());
         this.tbMainPane.add("Search", new SearchPanel());
         setResizable(false);
-        this.setLocationRelativeTo(null);        
-        connectServer();
+        this.setLocationRelativeTo(null);                
     }
 
     /**
@@ -77,7 +77,8 @@ public class ClientFrame extends javax.swing.JFrame {
         } catch (RemoteException ex) {
             showMessage("Server has not started already! Please close this application!");
         } catch (NotBoundException ex) {
-            showMessage("Server has not started already! Please close this application!");
+            showMessage("Server has not started already! Application will close immediately!!!");
+            System.exit(HIDE_ON_CLOSE);
         }
     }
     
